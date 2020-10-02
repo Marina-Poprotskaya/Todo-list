@@ -77,9 +77,11 @@ class App extends React.Component {
   const { todoList } = this.state;
   const searchingIndex = this.getCurrentSearchingIndex(id);
   if(searchingIndex === 0) return;
-  [todoList[searchingIndex], todoList[searchingIndex - 1]] = [todoList[searchingIndex - 1], todoList[searchingIndex]]
+  const beforeIndex = todoList.slice(0, searchingIndex-1);
+  const afterIndex = todoList.slice(searchingIndex + 1);
+  const newTodoList = [...beforeIndex, todoList[searchingIndex], todoList[searchingIndex-1], ...afterIndex];
   this.setState({ 
-    todoList,
+    todoList: newTodoList
   });
   
   }
@@ -88,10 +90,12 @@ class App extends React.Component {
     const { todoList } = this.state;
     const searchingIndex = this.getCurrentSearchingIndex(id)
     if(searchingIndex === todoList.length-1) return;
-    [todoList[searchingIndex], todoList[searchingIndex + 1]] = [todoList[searchingIndex + 1], todoList[searchingIndex]]
+    const beforeIndex = todoList.slice(0, searchingIndex);
+    const afterIndex = todoList.slice(searchingIndex + 2);
+    const newTodoList = [...beforeIndex, todoList[searchingIndex + 1], todoList[searchingIndex], ...afterIndex];
     this.setState({ 
-      todoList,
-    });
+    todoList: newTodoList
+  });
   }
 
   render() {
