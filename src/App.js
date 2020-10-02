@@ -74,16 +74,24 @@ class App extends React.Component {
   };
 
   onUp = (id) => {
+  const { todoList } = this.state;
   const searchingIndex = this.getCurrentSearchingIndex(id);
   if(searchingIndex === 0) return;
-  console.log('up', id);
+  [todoList[searchingIndex], todoList[searchingIndex - 1]] = [todoList[searchingIndex - 1], todoList[searchingIndex]]
+  this.setState({ 
+    todoList,
+  });
+  
   }
 
   onDown = (id) => {
     const { todoList } = this.state;
     const searchingIndex = this.getCurrentSearchingIndex(id)
     if(searchingIndex === todoList.length-1) return;
-    console.log('down', id);
+    [todoList[searchingIndex], todoList[searchingIndex + 1]] = [todoList[searchingIndex + 1], todoList[searchingIndex]]
+    this.setState({ 
+      todoList,
+    });
   }
 
   render() {
