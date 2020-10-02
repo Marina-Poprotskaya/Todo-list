@@ -1,0 +1,80 @@
+.list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin:  5px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    font-size: 1.8rem;
+}
+
+.buttons-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+}
+
+.content {
+    width: 75%;
+    word-wrap: break-word;
+}
+
+.btn {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    transition: ease-in-out .3s;
+}
+
+.btn:hover {
+    cursor: pointer;
+    box-shadow: 0 0 3px  rgb(184, 183, 183);
+    transition: ease-in-out .3s;
+}
+
+.btn:active {
+    box-shadow: none;
+    transition: ease-in-out .1s;
+    outline: none;
+}
+
+.btn:focus {
+    outline: none;
+    }
+
+.up {
+    background: url(../../images/arrow.png) no-repeat center;
+    background-size: contain;
+    background-color: rgba(132, 189, 255, 0.418);
+    transform: rotate(-90deg)
+}
+
+.down {
+    background: url(../../images/arrow.png) no-repeat center;
+    background-size: contain;
+    background-color: rgba(132, 189, 255, 0.418);
+    transform: rotate(90deg)
+}
+
+.fix {
+    background: url(../../images/fix.png) no-repeat center;
+    background-size: contain;
+    background-color: rgba(138, 255, 173, 0.493);
+}
+
+.del {
+    background: url(../../images/delete.png) no-repeat center;
+    background-size: contain;
+    background-color: rgba(255, 132, 159, 0.438);
+}

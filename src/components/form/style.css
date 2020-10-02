@@ -1,0 +1,46 @@
+.form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    height: auto;
+}
+
+.form-input {
+    width: 80%;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0 0 0 10px;
+    outline: none;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    font-size: 1.4rem;
+}
+
+.form-input:hover {
+    cursor: text;
+}
+
+.form-button {
+    width: 15%;
+    height: 40px;
+    outline: none;
+    border: none;
+    background-color: lightseagreen;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    box-shadow: 3px 3px 2px lightgray;
+    transition: ease-in-out .3s;
+}
+
+.form-button:hover {
+    cursor: pointer;
+    box-shadow: 3px 3px 2px rgb(184, 180, 180);
+    transition: ease-in-out .3s;
+}
+
+.form-button:active {
+    box-shadow: none;
+    transition: ease-in-out .1s;
+}
