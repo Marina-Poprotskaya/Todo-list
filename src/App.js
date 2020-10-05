@@ -7,28 +7,28 @@ import Modal from "./components/modal/component";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.onDeleted = this.onDeleted.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onCorrect = this.onCorrect.bind(this);
-    this.onDown = this.onDown.bind(this);
-    this.onUp = this.onUp.bind(this);
-    this.getCurrentSearchingIndex = this.getCurrentSearchingIndex.bind(this);
 
+    
     this.state = {
-      todoList: JSON.parse(localStorage.getItem("todoList")) || [],
+      todoList: this.getDefaultTodoList(),
       showModal: false,
       value: "",
       currentId: "",
     };
   }
+  
+  getDefaultTodoList = () => {
+    return JSON.parse(localStorage.getItem("todoList")) || []
+  }
 
   getCurrentSearchingIndex = (id) => {
     const { todoList } = this.state;
     const searchingIndex = todoList.findIndex((el) => el.id === id);
+
     return searchingIndex;
   }
 
-  onDeleted = (id) => {
+  handleDelete = (id) => {
     const { todoList } = this.state;
     const searchingIndex = this.getCurrentSearchingIndex(id);
     const beforeIndex = todoList.slice(0, searchingIndex);
@@ -38,7 +38,7 @@ class App extends React.Component {
     localStorage.setItem("todoList", JSON.stringify(newTodoList));
   };
 
-  onSubmit = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { todoList } = this.state;
     const id = `${todoList.length}-${e.target.childNodes[0].value}`
@@ -53,7 +53,7 @@ class App extends React.Component {
     e.target.reset();
   };
 
-  onCorrect = (id) => {
+  handleCorrect = (id) => {
     const { todoList } = this.state;
    const searchingIndex = this.getCurrentSearchingIndex(id);
     this.setState({ 
@@ -63,17 +63,27 @@ class App extends React.Component {
      });
   };
 
-  onSave = (e) => {
+  handleSave = (e) => {
     e.preventDefault();
-    const { todoList, currentId } = this.state;
-    todoList[currentId].content = e.target.childNodes[0].value;    
-    this.setState({ 
-      showModal: !this.state.showModal,
-      todoList,
+    const { currentId } = this.state;
+    const newContent = e.target.childNodes[0].value;
+    this.setState((prevState) => {
+      const newTodoList = prevState.todoList.map((el, index) => {
+
+        return index === currentId ? {...el, content: newContent  } : el;
+
+      })
+      localStorage.setItem("todoList", JSON.stringify(newTodoList));
+
+      return {
+        todoList: newTodoList,
+        showModal: !prevState.showModal,
+
+      };
     });
   };
 
-  onUp = (id) => {
+  handleUp = (id) => {
   const { todoList } = this.state;
   const searchingIndex = this.getCurrentSearchingIndex(id);
   if(searchingIndex === 0) return;
@@ -86,7 +96,7 @@ class App extends React.Component {
   
   }
 
-  onDown = (id) => {
+  handleDown = (id) => {
     const { todoList } = this.state;
     const searchingIndex = this.getCurrentSearchingIndex(id)
     if(searchingIndex === todoList.length-1) return;
@@ -98,14 +108,14 @@ class App extends React.Component {
   });
   }
 
-  render() {
+ renderTodoItems = () => {
     const elements = this.state.todoList.map((item) => {
       return (
         <Item
-          onDeleted={this.onDeleted}
-          onCorrect={this.onCorrect}
-          onUp={this.onUp}
-          onDown={this.onDown}
+          onDelete={this.handleDelete}
+          onCorrect={this.handleCorrect}
+          onUp={this.handleUp}
+          onDown={this.handleDown}
           content={item.content}
           id={item.id}
           key={item.id}
@@ -113,15 +123,19 @@ class App extends React.Component {
       );
     });
 
+    return elements;
+  }
+
+  render() {
     return (
       <div className="site">
         <div className="container">
-          <Header onSubmit={this.onSubmit} />
+          <Header onSubmit={this.handleSubmit} />
           <div className="main">
             {this.state.showModal && (
-              <Modal onSave={this.onSave} value={this.state.value} />
+              <Modal onSave={this.handleSave} value={this.state.value} />
             )}
-            <div className="task-list-wrapper">{elements}</div>
+            <div className="task-list-wrapper">{this.renderTodoItems()}</div>
           </div>
         </div>
       </div>

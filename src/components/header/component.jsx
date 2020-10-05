@@ -3,7 +3,7 @@ import Form from '../form/component';
 import './style.css';
 
 
-class Header extends React.Component {
+class Header extends React.PureComponent  {
 
     render() {
         return (

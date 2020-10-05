@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-class Form extends React.Component {
+class Form extends React.PureComponent {
 
     render() {
         return (
