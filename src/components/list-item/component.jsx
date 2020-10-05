@@ -1,36 +1,34 @@
 import React from "react";
 import "./style.css";
 
-class Item extends React.Component {
-  handleUp = () => {
-    this.props.onUp(this.props.id);
+function Item(props) {
+  const handleUp = () => {
+    props.onUp(props.id);
   };
 
-  handleDown = () => {
-    this.props.onDown(this.props.id);
+  const handleDown = () => {
+    props.onDown(props.id);
   };
 
-  handleCorrect = () => {
-    this.props.onCorrect(this.props.id);
+  const handleCorrect = () => {
+    props.onCorrect(props.id);
   };
 
-  handleDelete = () => {
-    this.props.onDelete(this.props.id);
+  const handleDelete = () => {
+    props.onDelete(props.id);
   };
 
-  render() {
-    return (
-      <div className="list-item">
-        <div className="content">{this.props.content}</div>
-        <div className="buttons-wrapper">
-          <button onClick={this.handleUp} className="btn up"></button>
-          <button onClick={this.handleDown} className="btn down"></button>
-          <button onClick={this.handleCorrect} className="btn fix"></button>
-          <button onClick={this.handleDelete} className="btn del"></button>
-        </div>
+  return (
+    <div className="list-item">
+      <div className="content">{props.content}</div>
+      <div className="buttons-wrapper">
+        <button onClick={handleUp} className="btn up"></button>
+        <button onClick={handleDown} className="btn down"></button>
+        <button onClick={handleCorrect} className="btn fix"></button>
+        <button onClick={handleDelete} className="btn del"></button>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Item;
